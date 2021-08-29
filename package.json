@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/DataDeveloper7865/bioanalytica-back-end/issues"
   },
-  "homepage": "https://github.com/DataDeveloper7865/bioanalytica-back-end#readme"
+  "homepage": "https://github.com/DataDeveloper7865/bioanalytica-back-end#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
