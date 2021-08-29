@@ -1,0 +1,25 @@
+{
+  "name": "bioanalytica-back-end",
+  "version": "1.0.0",
+  "description": "back end for bioanalytica",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataDeveloper7865/bioanalytica-back-end.git"
+  },
+  "keywords": [
+    "bianalytica",
+    "backend",
+    "auth",
+    "authentication"
+  ],
+  "author": "Stephen J. Whelan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DataDeveloper7865/bioanalytica-back-end/issues"
+  },
+  "homepage": "https://github.com/DataDeveloper7865/bioanalytica-back-end#readme"
+}
