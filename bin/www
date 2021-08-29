@@ -13,12 +13,13 @@ require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('bioanalytica-back-end:server');
 var http = require('http');
+var db = require('../db');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3003');
 app.set('port', port);
 
 /**
