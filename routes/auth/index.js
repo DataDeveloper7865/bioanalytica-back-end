@@ -4,7 +4,42 @@ var jwt = require('jsonwebtoken');
 
 // Register a User
 router.post('/register', async (req, res, next) => {
+  try {
+    //grab username and password from req.body;
+    const { username, password, email } = req.body;
 
+    if (!username || !password || !email) {
+      return res
+      .status(400)
+      .json({ error: "Username, password, and email required"})
+    }
+
+    if (password.length < 6) {
+      return res
+      .status(400)
+      .json({ error: "Password must be at least 6 characters" });
+    }
+
+    const user = await User.create(req.body);
+
+    const token = jwt.sign(
+      { id: user.dataValues.id },
+      process.env.SESSION_SECRET,
+      { expiresIn: 86400 }
+    );
+    res.json({
+      ...user.dataValues,
+      token,
+    });
+  } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+      return res.status(401).json({ error: "User already exists" });
+    } else if (error.name === "SequelizeValidationError") {
+      return res.status(401).json({ error: "Validation error"});
+    } else {
+      next(error);
+    }
+  }
 });
 
 // Login a User
