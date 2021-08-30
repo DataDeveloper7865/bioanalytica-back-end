@@ -80,11 +80,16 @@ router.post('/login', async (req, res, next) => {
 });
 
 // Logout a User
+// TODO: Finish Logout functionality
 router.delete('/logout', (req, res, next) => {
   res.sendStatus(204);
 });
 
+
+// Get a User
+// TODO: Finish Logout functionality
 router.get('/user', (req, res, next) => {
+  console.log(req.user)
   if (req.user) {
     return res.json(req.user);
   } else {
