@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const db = new Sequelize(process.env.DATABASE_URL || "postgres://postgres@localhost:5432/bioanalytica", {
+const db = new Sequelize(process.env.DATABASE_URL || `postgres://${process.env.DB_HOST}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/bioanalytica`, {
     logging: false
 });
 
