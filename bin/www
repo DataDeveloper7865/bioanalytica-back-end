@@ -10,7 +10,7 @@ require('dotenv').config();
  * Module dependencies.
  */
 
-var app = require('../app');
+var { app, sessionStore } = require('../app');
 var debug = require('debug')('bioanalytica-back-end:server');
 var http = require('http');
 var db = require('../db');
