@@ -3,9 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var jwt = require('jsonwebtoken');
+var session = require('express-session');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
+var db = require('./db');
+var { User } = require('./db/models/');
 
-var indexRouter = require('./routes/auth/index');
-var usersRouter = require('./routes/auth/users');
+//create store for sessions to persis in database
+var sessionStore = new SequelizeStore({ db });
+
+var { json, urlencoded } = express;
+
+// var indexRouter = require('./routes/auth/index');
+var usersRouter = require('./routes/auth/index');
+// const { Sequelize } = require('sequelize/types');
 
 var app = express();
 
@@ -20,9 +31,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function (req, res, next) {
+  const token = req.headers["x-access-token"];
+  if (token) {
+    jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+      if (err) {
+        return next();
+      }
+      User.findOne({
+        where: { id: decoded.id },
+      }).then((user) => {
+        req.user = user;
+        return next();
+      });
+    });
+  } else {
+    return next();
+  }
+});
+
 
 // Require all routes
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -41,4 +71,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = { app, sessionStore };
