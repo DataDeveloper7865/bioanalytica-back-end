@@ -47,8 +47,6 @@ router.post('/login', async (req, res, next) => {
   try {
    //must have usernmae and password in the req.body
    const { username, password } = req.body;
-   console.log("USERNAME", username)
-   console.log("password", password)
    if (!username || !password) 
      return res.status(400).json({ error: "Username and password required" });
 
@@ -58,8 +56,6 @@ router.post('/login', async (req, res, next) => {
          username: req.body.username,
        },
      });
-
-     console.log("USER IS", user)
 
      if (!user) {
        console.log({ error: `No user found for username: ${username}`});
