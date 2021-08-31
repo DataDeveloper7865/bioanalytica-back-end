@@ -35,7 +35,7 @@ const User = db.define('user', {
 });
 
 User.prototype.correctPassword = function (password) {
-    return User.encryptPassword
+    return User.encryptPassword(password, this.salt()) == this.password();
 };
 
 User.createSalt = function () {
