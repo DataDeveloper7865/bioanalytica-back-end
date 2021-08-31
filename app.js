@@ -8,6 +8,7 @@ var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var db = require('./db');
 var { User } = require('./db/models/');
+var cors = require('cors');
 
 //create store for sessions to persis in database
 var sessionStore = new SequelizeStore({ db });
@@ -30,6 +31,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 app.use(function (req, res, next) {
   const token = req.headers["x-access-token"];
