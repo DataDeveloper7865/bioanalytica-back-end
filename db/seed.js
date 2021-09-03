@@ -1,5 +1,6 @@
 const db = require('./db');
 const { User } = require('./models');
+const { Shirt } = 
 
 async function seed() {
     await db.sync({ force: true });
@@ -29,7 +30,18 @@ async function seed() {
         password: "password3",
     });
 
-    
+    const shirt1 = await Shirt.create({
+        shirtName: "shirt1",
+        description: "A super cool shirt 1",
+        price: "password3",
+    });
+
+    const shirt2 = await Shirt.create({
+        shirtName: "user3",
+        description: "user3@gmail.com",
+        price: "password3",
+    });
+
 
     console.log("seeded the Users");
 }
