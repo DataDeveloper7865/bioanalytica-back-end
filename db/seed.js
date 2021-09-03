@@ -23,6 +23,14 @@ async function seed() {
         password: "password3",
     });
 
+    const user4 = await User.create({
+        username: "user3",
+        email: "user3@gmail.com",
+        password: "password3",
+    });
+
+    
+
     console.log("seeded the Users");
 }
 
