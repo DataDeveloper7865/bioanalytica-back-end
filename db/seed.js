@@ -1,6 +1,7 @@
 const db = require('./db');
 const { User } = require('./models');
-const { Shirt } = 
+const { Shirt } = require('./models/shirts');
+require('dotenv').config();
 
 async function seed() {
     await db.sync({ force: true });
@@ -25,21 +26,23 @@ async function seed() {
     });
 
     const user4 = await User.create({
-        username: "user3",
-        email: "user3@gmail.com",
-        password: "password3",
+        username: "user4",
+        email: "user4@gmail.com",
+        password: "password4",
     });
 
     const shirt1 = await Shirt.create({
         shirtName: "shirt1",
         description: "A super cool shirt 1",
         price: "password3",
+        imgURL: "https://m.media-amazon.com/images/I/51zLZbEVSTL._AC_SL1200_.jpg"
     });
 
     const shirt2 = await Shirt.create({
         shirtName: "user3",
         description: "user3@gmail.com",
         price: "password3",
+        imgURL: "https://m.media-amazon.com/images/I/51zLZbEVSTL._AC_SL1200_.jpg"
     });
 
 
@@ -51,6 +54,7 @@ async function runSeed() {
     try {
         await seed();
     } catch (err) {
+        console.log(`HOST NAME IS: , ${process.env.DB_HOST}`)
         console.log(err);
         process.exitCode = 1;
     } finally {
