@@ -15,7 +15,7 @@ var sessionStore = new SequelizeStore({ db });
 
 var { json, urlencoded } = express;
 
-// var indexRouter = require('./routes/auth/index');
+var shirtsRouter = require('./routes/api/shirts');
 var usersRouter = require('./routes/auth/index');
 // const { Sequelize } = require('sequelize/types');
 
@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 
 
 // Require all routes
-// app.use('/', indexRouter);
+app.use('/shirts', shirtsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
