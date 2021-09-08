@@ -69,11 +69,6 @@ router.put('/:shirtid', async (req, res, next) => {
     const { shirtid } = req.params;
     const { shirtName, description, price, imgURL } = req.body;
 
-    console.log("shirtName is ", shirtName)
-    console.log("shirtName is ", description)
-    console.log("shirtName is ", price)
-    console.log("shirtName is ", imgURL)
-
     try {
 
         const shirt = await Shirt.update({
