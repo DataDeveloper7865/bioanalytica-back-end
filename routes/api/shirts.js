@@ -18,11 +18,12 @@ router.get('/:shirtid', async (req, res, next) => {
     const { shirtid } = req.params;
 
     try {
-        const shirt = await Shirt.find({
+        const shirt = await Shirt.findOne({
             where: {
                 id: shirtid
             }
         })
+        
 
         if (!shirt) {
             return res
@@ -38,8 +39,68 @@ router.get('/:shirtid', async (req, res, next) => {
 
 
 // Delete A Shirt By Id
+router.delete('/:shirtid', async (req, res, next) => {
+
+    const { shirtid } = req.params;
+
+    try {
+        const shirt = await Shirt.destroy({
+            where: {
+                id: shirtid
+            }
+        })
+
+        if (!shirt) {
+            return res
+            .status(400)
+            .json("No shirt found for this id")
+        }
+
+        return shirt
+
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 // Update A Shirt By Id
+router.put('/:shirtid', async (req, res, next) => {
+
+    const { shirtid } = req.params;
+    const { shirtName, description, price, imgURL } = req.body;
+
+    console.log("shirtName is ", shirtName)
+    console.log("shirtName is ", description)
+    console.log("shirtName is ", price)
+    console.log("shirtName is ", imgURL)
+
+    try {
+
+        const shirt = await Shirt.update({
+            shirtName: shirtName,
+            description: description,
+            price: price,
+            imgURL: imgURL
+        }, {
+            where: {
+                id: shirtid
+            }
+        });
+
+        if (!shirt) {
+            return res
+            .status(400)
+            .json("No shirt found for this id")
+        }
+
+        return res.json(shirt)
+
+    } catch (err) {
+        console.log(err);
+    }
+
+    }
+)
 
 //Create A New Shirt
 router.post('/new', async (req, res, next) => {
