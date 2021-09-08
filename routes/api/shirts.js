@@ -13,6 +13,28 @@ router.get('/', async (req, res, next) => {
 })
 
 // Get A Shirt By Id
+router.get('/:shirtid', async (req, res, next) => {
+
+    const { shirtid } = req.params;
+
+    try {
+        const shirt = await Shirt.find({
+            where: {
+                id: shirtid
+            }
+        })
+
+        if (!shirt) {
+            return res
+            .status(400)
+            .json("No shirt found for this id")
+        }
+
+        return res.json(shirt);
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 
 // Delete A Shirt By Id
