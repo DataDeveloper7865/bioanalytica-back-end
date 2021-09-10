@@ -1,0 +1,21 @@
+{
+    "apps": [
+        {
+            "name": "api",
+            "script": "./bin/www",
+            "merge_logs": true,
+            "max_restarts": 20,
+            "instances": 4,
+            "max_memory_restart": "200M",
+            "env": {
+                "PORT": 3003,
+                "NODE_ENV": "production",
+                "SESSION_SECRET": "HELLO WORLD",
+                "DB_HOST": "localhost",
+                "DB_USER": "postgres",
+                "DB_PASSWORD": "Jayjayiscool1"
+
+            }
+        }
+    ]
+}
