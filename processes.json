@@ -12,7 +12,7 @@
                 "NODE_ENV": "production",
                 "SESSION_SECRET": "HELLO WORLD",
                 "DB_HOST": "localhost",
-                "DB_USER": "DB_USER"
+                "DB_USER": "DB_USER",
                 "DB_PASSWORD": "DB_PASSWORD"
 
             }
